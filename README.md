@@ -20,8 +20,8 @@ All the required scripts are `code/`, to view the rules in the required website,
    cp html_pages/* website
 ```
 
+**For word order**:
 To extract word order patterns, run --
-For word order:
 ```
     cd code/
     python word_order.py \
@@ -42,7 +42,7 @@ and in the best-depth field simply specify -1 (e.g. `--best_depth -1 -1 10 10 10
 `--transliterate` option will allow you to transliterate the examples in the Roman script, note this option is only available for Marathi (mar) and Kannada (kan) languages,
 for other languages simply do not add it.
 
-For agreement:
+**For agreement**:
 ```
     cd code/
     python agreement_per_pos.py \
@@ -57,7 +57,7 @@ For agreement:
     --transliterate mar
 ```
 
-For general information:
+**For general information**:
 ```
     cd code/
     python general_information.py \
@@ -71,7 +71,8 @@ This will also extract illustrative examples for each word.
 If the input treebank is large (i.e > 20k sentences), we recommend breaking the file into smaller files and using the option `--distributed_files <path to the smaller files>`
 It may still take a long time to process with many files as it aggregates the information.
 
-For word usage, this requires a parallel corpus with [word alignments](https://github.com/neulab/awesome-align) already run, a sample is provided in the data folder. We break the code into three components:
+**For word usage**
+This requires a parallel corpus with [word alignments](https://github.com/neulab/awesome-align) already run, a sample is provided in the data folder. We break the code into three components:
 To get popular adjectives, synonyms and antonyms,
 ```
     cd code/
