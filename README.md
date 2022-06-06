@@ -43,4 +43,6 @@ For agreement:
     --folder_name website/
     --transliterate mar
 ```
-
+### Data for training Kannada and Marathi Syntactic Parser
+The treebanks converted in the SUD format can be found [here][https://github.com/Aditi138/auto-lex-learn/tree/master/data].
+It contains POS tags, lemmatization, morphological analyses and dependency analyses, note these are automatically converted data and not manually verified.
