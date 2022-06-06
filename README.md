@@ -1,5 +1,17 @@
 ### Teacher Perception ###
 
+
+## Online interface to Explore Rules
+The extracted rules can be explored [here](http://autolex.co/interface)
+*General Information* [here](https://aditi138.github.io/auto-lex-learn-general-info/mr_en/helper/syntactic_info.html)
+*Word Usage*
+  - Semantic Subdivisions [here](https://aditi138.github.io/auto-lex-learn-word-usage/mr_en/WordUsage/WordUsage.html)
+  - Basic Words [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab.html)
+  - Adjectives, Synonyms, Antonyms [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab_adj.html)
+*Word Order* [here](http://www.autolex.co/interface/es_gsd/WordOrder/WordOrder.html)
+*Suffix Usage* [here](http://www.autolex.co/interface/mr_en/Suffix/Suffix.html)
+*Agreement* [here](http://www.autolex.co/interface/mr_en/Agreement/Agreement.html)
+
 ## Code for Extracting the Learning Materials
 All the required scripts are `code/`, to view the rules in the required website, first create a folder (`website`) to hold the rules and copy the source html files --
 ```
@@ -43,6 +55,68 @@ For agreement:
     --folder_name website/
     --transliterate mar
 ```
+
+For general information:
+```
+    cd code/
+    python general_information.py \
+    --input ../data/SUD_Marathi-Sample/mr_sam-sud-train.conllu \
+    --folder_name website \
+    --lang mr \
+    --transliterate mar \
+```
+Running this command will extract answer descriptions for understanding syntax of the language, for example, how many genders this language has, which words take what genders, and so on.
+This will also extract illustrative examples for each word.
+If the input treebank is large (i.e > 20k sentences), we recommend breaking the file into smaller files and using the option `--distributed_files <path to the smaller files>`
+It may still take a long time to process with many files as it aggregates the information.
+
+For word usage, this requires a parallel corpus with [word alignments](https://github.com/neulab/awesome-align) already run, a sample is provided in the data folder. We break the code into three components:
+To get popular adjectives, synonyms and antonyms,
+```
+    cd code/
+    python vocabulary_adj.py \
+    --en_input ../data/SUD_English-Sample/en_sam-sud-train.conllu \
+    --mr_input ../data/SUD_Marathi-Sample/mr_sam-sud-train.conllu \
+    --alignment ../data/alignments/train.pred \
+    --input ../data/en_mr_vocab.txt \
+    --en_adj ../data/en_adj.txt \
+    --folder_name website \
+    --lang mr \
+    --transliterate mar
+```
+The script first extracts popular adjectives and vocabulary from the data, and stores them in locations specified by `--en_adj` and `--input`.
+If these files are already existing, they won't be overwritten.
+
+To get words for popular semantic categories, first we need to identify the wordnet senses for each English word in our corpus.
+to identify wordnets we used the [XL-WSD](https://github.com/SapienzaNLP/xl-wsd-code).
+```
+    cd code/
+    python mapBabelIDSUD.py \
+    --en_input ../data/SUD_English-Sample/en_sam-sud-train.conllu \
+    --mr_input ../data/SUD_Marathi-Sample/mr_sam-sud-train.conllu \
+    --alignment ../data/alignments/train.pred \
+    --wsd_output_pred ~/xl-wsd-code/data/output/models/roberta-large_xlm-roberta-large/evaluation/wsd-en-mr.predictions.txt \
+    --wsd babelid_synset.txt \
+    --output vocab_wordnet.txt
+```
+A sample output from the XL-WSD is shown in `data/wsd-en-mr.predictions.txt', please refer to the XL-WSD code to know how to format the data (in our case the English raw sentences) appropirately.
+The XL-WSD code outputs the babelids for each word in the sentence (e.g. 7000.1 denotes the 1st token in 7000th input sent).
+To convert the babelid into the wordnet sense, we use the [BabelNet API](https://babelnet.io/v6/getOutgoingEdges), example output is shown in `data/babelid_synset.txt`.
+This will output the `vocab_wordnet.txt` which contains the wordnet id with corresponding English words (example in `data/vocab_wordnet.txt`).
+Next, to identify the words in the target languge with examples run--
+```
+    cd code/
+    python vocabulary_basic_words.py \
+    --input data/vocab_wordnet.txt \
+    --folder_name website \
+    --lang mr \
+    --transliterate mar \
+    --en_adj en_adj.txt
+```
+`en_adj.txt` was created in the script `vocabulary_adj.py`.
+
+To get the semantic subdivisions, refer [here](https://github.com/Aditi138/LexSelection).
+
 ### Data for training Kannada and Marathi Syntactic Parser
 The treebanks converted in the SUD format can be found [here](https://github.com/Aditi138/auto-lex-learn/tree/master/data).
 It contains POS tags, lemmatization, morphological analyses and dependency analyses, note these are automatically converted data and not manually verified.
