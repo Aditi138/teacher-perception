@@ -6,12 +6,10 @@ The extracted rules can be explored [here](http://autolex.co/interface). We cove
 
 1. *General Information* [here](https://aditi138.github.io/auto-lex-learn-general-info/mr_en/helper/syntactic_info.html)
 2. *Word Usage*
-        * Semantic Subdivisions [here](https://aditi138.github.io/auto-lex-learn-word-usage/mr_en/WordUsage/WordUsage.html)
+        - Semantic Subdivisions [here](https://aditi138.github.io/auto-lex-learn-word-usage/mr_en/WordUsage/WordUsage.html)
+        - Basic Words [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab.html)
+        - Adjectives, Synonyms, Antonyms [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab_adj.html)
 
-        * Basic Words [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab.html)
-
-        * Adjectives, Synonyms, Antonyms [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab_adj.html)
-        
 3. *Word Order* [here](http://www.autolex.co/interface/es_gsd/WordOrder/WordOrder.html)
 4. *Suffix Usage* [here](http://www.autolex.co/interface/mr_en/Suffix/Suffix.html)
 5. *Agreement* [here](http://www.autolex.co/interface/mr_en/Agreement/Agreement.html)
