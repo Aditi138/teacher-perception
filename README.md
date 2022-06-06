@@ -2,15 +2,16 @@
 
 
 ## Online interface to Explore Rules
-The extracted rules can be explored [here](http://autolex.co/interface)
-*General Information* [here](https://aditi138.github.io/auto-lex-learn-general-info/mr_en/helper/syntactic_info.html)
-*Word Usage*
+The extracted rules can be explored [here](http://autolex.co/interface). We cover the following grammar aspects in the tool.
+
+1. *General Information* [here](https://aditi138.github.io/auto-lex-learn-general-info/mr_en/helper/syntactic_info.html)
+2. *Word Usage*
   - Semantic Subdivisions [here](https://aditi138.github.io/auto-lex-learn-word-usage/mr_en/WordUsage/WordUsage.html)
   - Basic Words [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab.html)
   - Adjectives, Synonyms, Antonyms [here](https://aditi138.github.io/auto-lex-learn/mr_en/WordUsage/vocab_adj.html)
-*Word Order* [here](http://www.autolex.co/interface/es_gsd/WordOrder/WordOrder.html)
-*Suffix Usage* [here](http://www.autolex.co/interface/mr_en/Suffix/Suffix.html)
-*Agreement* [here](http://www.autolex.co/interface/mr_en/Agreement/Agreement.html)
+3. *Word Order* [here](http://www.autolex.co/interface/es_gsd/WordOrder/WordOrder.html)
+4. *Suffix Usage* [here](http://www.autolex.co/interface/mr_en/Suffix/Suffix.html)
+5. *Agreement* [here](http://www.autolex.co/interface/mr_en/Agreement/Agreement.html)
 
 ## Code for Extracting the Learning Materials
 All the required scripts are `code/`, to view the rules in the required website, first create a folder (`website`) to hold the rules and copy the source html files --
