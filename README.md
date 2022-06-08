@@ -119,6 +119,31 @@ Next, to identify the words in the target languge with examples run--
 
 To get the semantic subdivisions, refer [here](https://github.com/Aditi138/LexSelection).
 
+**For suffix usage**
+The first thing we need is to identify all the suffixes in a word with its morphological properties. For Marathi and Kannada, the treebanks we release (mentioned below) have suffixes annotated.
+We use that as a training data to identify suffixes in our large corpora.
+Specifically, we use the model ([here](https://github.com/tatyana-ruzsics/interpretable-inflection)) to transform the suffix data in the expected format.
+The original model expects a lemma with its morphological analyses and outputs the inflected form.
+We modify the input/output format to take input as the inflected word form with its morphological analyses and produce as output the lemma with each suffix.
+Sample training data for that is shown in `data/train_lem.txt`, for creating this data from the treebanks run--
+```
+    cd code/
+    python helper_scripts/createLemmaTraining.py --input train.conllu --dev train_lem.txt
+```
+Setup the code from [here](https://github.com/Aditi138/interpretable-inflection) and run--
+```
+    $DIR=~//interpretable-inflection
+    cd $DIR
+    $train=~/parallel-data/en-mr/mr_pan-train-lem.txt
+    $dev=~/parallel-data/en-mr/mr_pan-dev-lem.txt
+    ./train-ch.sh mr_models $train $dev config/gate-sparse-enc-static-head.yml # chED+chSELF-ATT model
+```
+The models learnt for Marathi and Kannada are stored in `mr_models.zip` and `kn_models.zip`, which can be accessed [here](https://www.autolex.co/download.html)
+You can use the `predict_kn.sh` example script to use the trained models to predict on similar formatted data.
+Since, we had use the [Samanantar dataset](https://indicnlp.ai4bharat.org/samanantar/) which comprises of 4M sentences, we segmented the data into smaller files with 20k sents.
+The results from all predictions (which are included in the `mr_models/predict/`) are aggregated using  `run.sh`, which identifies the top-20 popular suffixes and the learnt segmentation for individual words, the ones we used are stored in `outputs.zip` ([here](https://www.autolex.co/download.html)).
+
+
 ### Data for training Kannada and Marathi Syntactic Parser
 The treebanks converted in the SUD format can be found [here](https://github.com/Aditi138/auto-lex-learn/tree/master/data).
 It contains POS tags, lemmatization, morphological analyses and dependency analyses, note these are automatically converted data and not manually verified.
